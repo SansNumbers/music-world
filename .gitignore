@@ -30,3 +30,7 @@
 !/tmp/storage/.keep
 
 /public/assets
+
+.env
+
+/config/master.key
