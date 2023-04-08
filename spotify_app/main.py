@@ -51,12 +51,11 @@ def get_songs_by_artist(request):
     headers = {
         "Authorization": f"Bearer {token}",
     }
-    url = f'https://api.spotify.com/v1/artists/41X1TR6hrK8Q2ZCpp2EqCz/top-tracks/?country=US'
+    url = f'https://api.spotify.com/v1/artists/41X1TR6hrK8Q2ZCpp2EqCz/top-tracks/?country=UA'
     result = get(url, headers=headers)
     json_result = json.loads(result.content)
 
-    # for idx, song in enumerate(json_result['tracks']):
-    #     print(f"{idx + 1}. {song['name']}")
+    for idx, song in enumerate(json_result['tracks']):
+        print(f"{idx + 1}. {song['name']}")
 
     return JsonResponse(json_result)
-
