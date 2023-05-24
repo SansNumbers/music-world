@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,7 @@ CUSTOM_APPS = [
 
 # External apps
 EXTERNAL_APPS = [
+    'rest_framework_simplejwt',
     'rest_framework',
 ]
 
@@ -108,6 +110,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'JWT_AUTH': {
+        'JWT_EXPIRATION_DELTA': timedelta(days=1),
+    },
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
