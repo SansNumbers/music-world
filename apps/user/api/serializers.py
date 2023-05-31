@@ -18,6 +18,8 @@ class MyProfileRetrieveUpdateSerializer(ModelSerializer):
 
 
 class UserCreateSerializer(ModelSerializer):
+    first_name = CharField(required=True, max_length=64, )
+    last_name = CharField(required=True, max_length=64, )
     password = CharField(write_only=True, max_length=64, )
 
     class Meta:
