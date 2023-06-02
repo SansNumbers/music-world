@@ -62,6 +62,22 @@ def search_for_album(request):
     return JsonResponse(json_result[0])
 
 
+def search_for_track(request):
+    token = get_token()
+    headers = {
+        "Authorization": f"Bearer {token}",
+    }
+    url = 'https://api.spotify.com/v1/search'
+    query = f"?q={request.GET['track_name']}&type=track&limit=1"
+    query_url = url + query
+    result = get(query_url, headers=headers)
+    json_result = json.loads(result.content)['tracks']['items']
+    if len(json_result) == 0:
+        print('No tracks with this name exists.')
+        return None
+    return JsonResponse(json_result[0])
+
+
 def get_songs_by_artist(request):
     token = get_token()
     headers = {
