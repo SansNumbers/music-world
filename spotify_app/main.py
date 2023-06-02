@@ -41,7 +41,23 @@ def search_for_artist(request):
     result = get(query_url, headers=headers)
     json_result = json.loads(result.content)['artists']['items']
     if len(json_result) == 0:
-        print('No artist with this name exists.')
+        print('No artists with this name exists.')
+        return None
+    return JsonResponse(json_result[0])
+
+
+def search_for_album(request):
+    token = get_token()
+    headers = {
+        "Authorization": f"Bearer {token}",
+    }
+    url = 'https://api.spotify.com/v1/search'
+    query = f"?q={request.GET['album_name']}&type=album&limit=1"
+    query_url = url + query
+    result = get(query_url, headers=headers)
+    json_result = json.loads(result.content)['albums']['items']
+    if len(json_result) == 0:
+        print('No albums with this name exists.')
         return None
     return JsonResponse(json_result[0])
 
