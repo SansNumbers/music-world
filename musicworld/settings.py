@@ -1,6 +1,7 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,6 +29,10 @@ DEFAULT_APPS = [
 # Custom apps configs
 CUSTOM_APPS = [
     'apps.user.apps.UserConfig',
+    'apps.artist.apps.ArtistConfig',
+    'apps.album.apps.AlbumConfig',
+    'apps.track.apps.TrackConfig',
+    'apps.review.apps.ReviewConfig'
 ]
 
 # External apps
@@ -108,7 +113,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -116,9 +121,6 @@ REST_FRAMEWORK = {
     'JWT_AUTH': {
         'JWT_EXPIRATION_DELTA': timedelta(days=1),
     },
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
@@ -131,3 +133,5 @@ REST_FRAMEWORK = {
 }
 
 SITE_ID = 1
+
+AUTH_USER_MODEL = 'user.User'

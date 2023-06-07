@@ -5,4 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('spotify/', include('spotify_app.urls')),
     path('api/v1/', include('apps.user.api.urls')),
+    path('api/v1/', include('apps.album.api.urls')),
 ]
