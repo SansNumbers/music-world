@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -25,10 +26,15 @@ DEFAULT_APPS = [
 ]
 
 # Custom apps configs
-CUSTOM_APPS = []
+CUSTOM_APPS = [
+    'apps.user.apps.UserConfig',
+]
 
 # External apps
-EXTERNAL_APPS = []
+EXTERNAL_APPS = [
+    'rest_framework_simplejwt',
+    'rest_framework',
+]
 
 INSTALLED_APPS = DEFAULT_APPS + CUSTOM_APPS + EXTERNAL_APPS
 
@@ -99,3 +105,29 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'JWT_AUTH': {
+        'JWT_EXPIRATION_DELTA': timedelta(days=1),
+    },
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'TEST_REQUEST_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+}
+
+SITE_ID = 1
