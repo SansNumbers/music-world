@@ -2,8 +2,12 @@ import base64
 import json
 import os
 
+from flask import Flask
+
 from django.http import JsonResponse
 from requests import post, get
+
+app = Flask(__name__)
 
 client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')

@@ -17,7 +17,7 @@ class RegisterUserAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
     permission_classes = ()
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
