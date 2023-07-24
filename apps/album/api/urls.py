@@ -1,7 +1,7 @@
 from django.urls import path
 
-from apps.album.api.views import AlbumListAPIView
+from apps.album.api.views import AlbumListCreateAPIView
 
 urlpatterns = [
-    path('albums/', AlbumListAPIView.as_view(), name='album_list')
+    path('albums/', AlbumListCreateAPIView.as_view(), name='album_list')
 ]
